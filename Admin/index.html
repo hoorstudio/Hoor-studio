@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoor Studio — Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Jost', sans-serif; background: #08080a; color: #fff; padding: 40px 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #161619; padding: 30px; border: 1px solid #222; }
+        h2 { text-align: center; font-weight: 300; letter-spacing: 2px; margin-bottom: 30px; color: #c8c8d2; }
+        label { display: block; margin-bottom: 8px; color: #a8a8b0; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; background: #0f0f12; border: 1px solid #2d2d35; color: #fff; margin-bottom: 20px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #fff; color: #000; border: none; cursor: pointer; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; }
+        button:hover { background: #c8c8d2; }
+        textarea { width: 100%; height: 150px; background: #0f0f12; border: 1px solid #2d2d35; color: #a8a8b0; padding: 10px; box-sizing: border-box; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>HOOR STUDIO ADMIN</h2>
+        <form id="productForm">
+            <label>Product Name</label>
+            <input type="text" id="pName" placeholder="e.g., Silk Editorial Gown" required>
+
+            <label>Price (PKR or Text)</label>
+            <input type="text" id="pPrice" placeholder="e.g., Rs. 24,500" required>
+
+            <label>Image URL</label>
+            <input type="url" id="pImg" placeholder="e.g., https://images.unsplash.com/..." required>
+
+            <label>Website Section</label>
+            <select id="pSection">
+                <option value="trending">Trending Collection</option>
+                <option value="new-arrivals">New Arrivals</option>
+                <option value="best-sellers">Best Sellers</option>
+            </select>
+
+            <button type="button" onclick="addProduct()">Product Add Karo</button>
+        </form>
+
+        <button onclick="copyJSON()" style="background: #25d366; color: #fff;">JSON Copy Karo</button>
+        <label>Aapka Output JSON (Isko GitHub par paste karein):</label>
+        <textarea id="jsonOutput" readonly>[]</textarea>
+    </div>
+
+    <script>
+        let productsList = [];
+        function addProduct() {
+            const name = document.getElementById('pName').value;
+            const price = document.getElementById('pPrice').value;
+            const image = document.getElementById('pImg').value;
+            const section = document.getElementById('pSection').value;
+
+            if(!name || !price || !image) return alert('Meharbani karke saari fields fill karein!');
+
+            productsList.push({ id: Date.now(), name, price, image, section });
+            document.getElementById('jsonOutput').value = JSON.stringify(productsList, null, 2);
+            document.getElementById('productForm').reset();
+            alert('Product list mein add ho gaya! Mazeed add karein ya JSON copy karein.');
+        }
+
+        function copyJSON() {
+            const copyText = document.getElementById("jsonOutput");
+            copyText.select();
+            document.execCommand("copy");
+            alert("JSON code copy ho gaya! Ab ise GitHub par '_products/products.json' file mein paste kar dein.");
+        }
+    </script>
+</body>
+</html>
