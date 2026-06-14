@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Hoor Studio — Ultra-luxury women's western fashion. New Season 2025.">
-<title>HOOR STUDIO — Luxury Women's Fashion</title>
+<meta name="description" content="Hoor Studio — Premium Baby Garments & Kids Clothing">
+<title>HOOR STUDIO — Baby Garments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Jost:wght=200;300;400;500&family=Italiana&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Jost:wght@200;300;400;500&family=Italiana&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
-   ROOT & RESET (No Changes)
+   ROOT & RESET
 ═══════════════════════════════════════════ */
 :root {
   --ink:      #08080a;
@@ -19,496 +19,864 @@
   --ink-4:    #1d1d22;
   --silver:   #a8a8b0;
   --silver-2: #c8c8d2;
-  --silver-3: #f5f5f7;
-  --gold:     #c5a880;
-  --gold-2:   #e5c8a0;
-  --white:    #ffffff;
-  --font-serif: 'Bodoni Moda', serif;
-  --font-sans:  'Jost', sans-serif;
-  --font-disp:  'Italiana', serif;
+  --silver-3: #e8e8ee;
+  --white:    #f5f4f0;
+  --accent:   #d4af6a;
+  --accent-2: #ead28c;
+  --ease:     cubic-bezier(0.16,1,0.3,1);
+  --ease-2:   cubic-bezier(0.4,0,0.2,1);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--ink);
-  color: var(--silver-3);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--ink);
+  color:var(--white);
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+  -webkit-font-smoothing:antialiased;
 }
-a { color:inherit; text-decoration:none; }
-img { width:100%; height:auto; display:block; object-fit:cover; }
-.c { max-width:1440px; margin:0 auto; padding:0 40px; }
-@media(max-width:768px){ .c { padding:0 20px; } }
-.sec-pad { padding:140px 0; }
-@media(max-width:768px){ .sec-pad { padding:80px 0; } }
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:none;font-family:inherit}
+ul{list-style:none}
 
 /* ═══════════════════════════════════════════
-   TYPOGRAPHY & HEADINGS
+   CURSOR
 ═══════════════════════════════════════════ */
-.sec-head { margin-bottom:80px; text-align:center; }
-@media(max-width:768px){ .sec-head { margin-bottom:50px; } }
-.sh-sub {
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:4px;
-  color: var(--gold);
-  margin-bottom:12px;
+#cur{
+  position:fixed;width:8px;height:8px;
+  background:var(--white);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .3s var(--ease),height .3s var(--ease),background .3s;
+}
+#cur-orbit{
+  position:fixed;width:32px;height:32px;
+  border:1px solid rgba(212,175,106,.5);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .5s var(--ease),height .5s var(--ease),border-color .3s;
+}
+body.hovered #cur{width:4px;height:4px;background:var(--accent)}
+body.hovered #cur-orbit{width:52px;height:52px;border-color:var(--accent)}
+
+/* ═══════════════════════════════════════════
+   LOADER
+═══════════════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;background:var(--ink);
+  z-index:10000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0;
+}
+.loader-brand{
+  font-family:'Italiana',serif;
+  font-size:clamp(1.6rem,4vw,2.8rem);
+  letter-spacing:.5em;text-indent:.5em;
+  color:var(--white);margin-bottom:48px;
+  overflow:hidden;
+}
+.loader-brand span{
+  display:inline-block;
+  animation:charDrop 1.2s var(--ease) both;
+}
+.loader-progress{
+  width:160px;height:1px;
+  background:rgba(255,255,255,.1);overflow:hidden;
+}
+.loader-bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--white));
+  animation:loadFill 1.8s var(--ease) .4s forwards;
+}
+.loader-num{
+  font-size:.6rem;letter-spacing:.35em;
+  color:var(--silver);margin-top:20px;
   font-weight:400;
 }
-.sh-title {
-  font-family: var(--font-disp);
-  font-size:48px;
-  font-weight:400;
-  color: var(--white);
-  letter-spacing:1px;
+@keyframes charDrop{
+  0%{opacity:0;transform:translateY(30px)}
+  100%{opacity:1;transform:translateY(0)}
 }
-@media(max-width:768px){ .sh-title { font-size:36px; } }
+@keyframes loadFill{
+  to{width:100%}
+}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.025;pointer-events:none;z-index:1;
+}
 
 /* ═══════════════════════════════════════════
-   HEADER & NAVIGATION
+   NAV
 ═══════════════════════════════════════════ */
-.h {
-  position:absolute; top:0; left:0; width:100%; z-index:100;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  background: transparent;
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:1000;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;
+  transition:background .6s var(--ease),backdrop-filter .6s,border-color .6s;
+  border-bottom:1px solid transparent;
 }
-.h-inner {
-  height:100px; display:flex; align-items:center; justify-content:space-between;
+nav.solid{
+  background:rgba(8,8,10,.82);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom-color:rgba(255,255,255,.06);
 }
-@media(max-width:768px){ .h-inner { height:80px; } }
-.logo {
-  font-family: var(--font-disp);
-  font-size:28px;
-  letter-spacing:6px;
-  color: var(--white);
+.nav-logo{
+  font-family:'Italiana',serif;
+  font-size:1.4rem;letter-spacing:.3em;text-indent:.3em;
+  color:var(--white);flex-shrink:0;
+}
+.nav-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;gap:44px;
+}
+.nav-center a{
+  font-size:.6rem;letter-spacing:.22em;font-weight:400;
+  color:var(--silver);text-transform:uppercase;
+  position:relative;transition:color .3s;
+}
+.nav-center a::after{
+  content:'';position:absolute;left:0;bottom:-4px;
+  width:0;height:1px;background:var(--accent);
+  transition:width .4s var(--ease);
+}
+.nav-center a:hover{color:var(--white)}
+.nav-center a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-icon{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--silver);border:1px solid rgba(255,255,255,.1);
+  transition:color .3s,border-color .3s,background .3s;
+  font-size:.85rem;
+}
+.nav-icon:hover{color:var(--white);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+.nav-icon svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+.hamburger{
+  display:none;flex-direction:column;gap:6px;
+  padding:8px;margin-right:-8px;
+}
+.hamburger span{
+  width:22px;height:1px;background:var(--silver);
+  transition:transform .4s var(--ease),opacity .3s,width .3s;
+  display:block;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ═══════════════════════════════════════════
+   MOBILE OVERLAY MENU
+═══════════════════════════════════════════ */
+.mobile-overlay{
+  position:fixed;inset:0;top:68px;
+  background:rgba(8,8,10,.97);backdrop-filter:blur(32px);
+  z-index:999;display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;
+  padding:0 8%;gap:0;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .7s var(--ease);
+}
+.mobile-overlay.open{clip-path:inset(0 0 0% 0)}
+.mob-link{
+  font-family:'Italiana',serif;
+  font-size:clamp(2rem,8vw,4rem);
+  letter-spacing:.04em;color:rgba(255,255,255,.4);
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);
+  width:100%;transition:color .3s;
+}
+.mob-link:hover{color:var(--white)}
+.mob-socials{display:flex;gap:14px;margin-top:40px}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero{
+  height:100vh;min-height:680px;
+  position:relative;overflow:hidden;
+  display:grid;place-items:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  will-change:transform;
+}
+.hero-bg img{
+  width:100%;height:115%;
+  object-fit:cover;object-position:center top;
+  transform:translateY(0);
+  filter:brightness(.48) contrast(1.06);
+}
+.hero-gradient{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(8,8,10,.55) 0%,transparent 35%,transparent 55%,rgba(8,8,10,.92) 100%),
+    linear-gradient(90deg,rgba(8,8,10,.7) 0%,transparent 50%);
+}
+.hero-vignette{
+  position:absolute;inset:0;
+  box-shadow:inset 0 0 200px rgba(8,8,10,.7);
+}
+.hero-content{
+  position:relative;z-index:2;
+  max-width:800px;padding:0 6%;
+  text-align:left;
+  display:flex;flex-direction:column;
+  gap:0;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:16px;
+  font-size:.58rem;letter-spacing:.4em;font-weight:400;
+  color:var(--accent);text-transform:uppercase;
+  margin-bottom:28px;
+  opacity:0;animation:fadeSlide .9s var(--ease) .6s forwards;
+}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--accent)}
+.hero-h1{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(3.8rem,8.5vw,9rem);
+  font-weight:300;line-height:.95;
+  letter-spacing:-.01em;
+  margin-bottom:32px;
+  overflow:hidden;
+}
+.hero-h1 .line{
+  display:block;overflow:hidden;
+}
+.hero-h1 .line span{
+  display:block;
+  opacity:0;transform:translateY(100%);
+  animation:lineReveal 1.1s var(--ease) both;
+}
+.hero-h1 .line:nth-child(1) span{animation-delay:.5s}
+.hero-h1 .line:nth-child(2) span{animation-delay:.65s}
+.hero-h1 .line:nth-child(3) span{animation-delay:.8s}
+.hero-h1 em{font-style:italic;color:rgba(245,244,240,.6)}
+.hero-sub{
+  font-size:.8rem;letter-spacing:.14em;line-height:1.9;
+  color:var(--silver-2);max-width:420px;margin-bottom:48px;
+  opacity:0;animation:fadeSlide .9s var(--ease) 1s forwards;
+}
+.hero-actions{
+  display:flex;gap:16px;flex-wrap:wrap;
+  opacity:0;animation:fadeSlide .9s var(--ease) 1.1s forwards;
+}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;
+  background:var(--white);color:var(--ink);
+  font-size:.62rem;letter-spacing:.25em;font-weight:500;
   text-transform:uppercase;
+  transition:background .3s,color .3s,transform .4s var(--ease),box-shadow .4s;
 }
-.nav { display:flex; gap:40px; }
-@media(max-width:1024px){ .nav { display:none; } }
-.nav-link {
-  font-size:12px; text-transform:uppercase; letter-spacing:2px;
-  color: var(--silver-2); transition:color 0.4s ease;
+.btn-wa:hover{
+  background:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 20px 50px rgba(212,175,106,.25);
 }
-.nav-link:hover { color: var(--white); }
-.h-actions { display:flex; align-items:center; gap:24px; }
-.h-btn { background:none; border:none; color:var(--white); cursor:pointer; }
-
-/* ═══════════════════════════════════════════
-   HERO CANVAS
-═══════════════════════════════════════════ */
-.hero {
-  position:relative; height:100vh; min-height:700px;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; background:#000;
+.btn-wa svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 35px;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--silver-3);
+  font-size:.62rem;letter-spacing:.25em;font-weight:400;
+  text-transform:uppercase;
+  transition:border-color .3s,color .3s,background .3s,transform .4s var(--ease);
 }
-.hero-bg {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  opacity:0.45; transform:scale(1.05);
+.btn-outline:hover{
+  border-color:rgba(255,255,255,.5);color:var(--white);
+  background:rgba(255,255,255,.05);
+  transform:translateY(-3px);
 }
-.hero-bg img { width:100%; height:100%; object-fit:cover; }
-.hero-content {
-  position:relative; z-index:2; text-align:center; max-width:800px; padding:0 20px;
+.hero-scroll-indicator{
+  position:absolute;bottom:40px;left:50%;
+  transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeIn 1s var(--ease) 1.6s forwards;
 }
-.hero-sub {
-  font-size:13px; text-transform:uppercase; letter-spacing:6px;
-  color: var(--gold); margin-bottom:24px;
+.scroll-line{
+  width:1px;height:64px;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:scrollBob 2.2s ease-in-out infinite;
 }
-.hero-title {
-  font-family: var(--font-serif);
-  font-size:80px; font-weight:300; line-height:1.1;
-  color: var(--white); margin-bottom:40px; letter-spacing:-1px;
+@media(max-width:440px){.collections-grid{grid-template-columns:1fr 1fr}}
+.col-card{
+  position:relative;overflow:hidden;
+  aspect-ratio:.75/1;
 }
-@media(max-width:768px){ .hero-title { font-size:46px; margin-bottom:30px; } }
-.hero-title i { font-family: var(--font-serif); font-style:italic; }
-.btn-lux {
-  display:inline-block; padding:18px 44px;
-  background: var(--white); color: var(--ink);
-  font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:3px;
-  transition:all 0.5s cubic-bezier(0.16,1,0.3,1); border:1px solid var(--white);
+.col-card img{
+  transition:transform 1.2s var(--ease),filter .8s;
+  filter:brightness(.55);
 }
-.btn-lux:hover {
-  background: transparent; color: var(--white); transform:translateY(-2px);
+.col-card:hover img{transform:scale(1.1);filter:brightness(.7)}
+.col-card-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 20px;
+  background:linear-gradient(180deg,transparent,rgba(8,8,10,.85));
 }
-
-/* ═══════════════════════════════════════════
-   PRODUCT CARD ARCHITECTURE (Aapka Original Design)
-═══════════════════════════════════════════ */
-.trending-layout {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:50px 40px;
+.col-card-name{
+  font-family:'Bodoni Moda',serif;
+  font-size:1.2rem;font-weight:300;letter-spacing:.02em;
+  margin-bottom:4px;line-height:1.2;
 }
-@media(max-width:1024px){ .trending-layout { grid-template-columns:repeat(2,1fr); gap:40px 20px; } }
-@media(max-width:600px){ .trending-layout { grid-template-columns:1fr; gap:35px; } }
-
-.p-card { display:flex; flex-direction:column; position:relative; }
-.p-card-img {
-  position:relative; aspect-ratio:3/4; overflow:hidden; background: var(--ink-2);
+.col-card-count{
+  font-size:.52rem;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase;
 }
-.p-card-img img {
-  width:100%; height:100%; object-fit:cover;
-  transition:transform 1.2s cubic-bezier(0.16,1,0.3,1);
+@keyframes scrollBob{
+  0%,100%{transform:scaleY(1);opacity:.5}
+  50%{transform:scaleY(1.3);opacity:1}
 }
-.p-card:hover .p-card-img img { transform:scale(1.06); }
-.p-card-overlay {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  background: linear-gradient(to bottom, transparent 60%, rgba(8,8,10,0.4));
-  opacity:0; transition:opacity 0.6s ease;
-}
-.p-card:hover .p-card-overlay { opacity:1; }
-
-.p-card-action {
-  position:absolute; bottom:20px; left:20px; right:20px;
-  transform:translateY(15px); opacity:0;
-  transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
-}
-.p-card:hover .p-card-action { transform:translateY(0); opacity:1; }
-
-.wa-card-btn {
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  width:100%; padding:14px; background: rgba(255,255,255,0.95);
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  color: var(--ink); font-size:11px; font-weight:500; letter-spacing:2px;
-  text-transform:uppercase; transition:all 0.3s ease;
-}
-.wa-card-btn:hover { background: var(--white); color: #25d366; }
-
-.p-card-meta { margin-top:20px; display:flex; justify-content:space-between; align-items:baseline; }
-.p-card-title {
-  font-size:15px; font-weight:400; color: var(--white);
-  letter-spacing:0.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:70%;
-}
-.p-card-price { font-size:14px; font-weight:300; color: var(--silver-2); }
-
-/* ═══════════════════════════════════════════
-   EDITORIAL ASYMMETRIC GRID
-═══════════════════════════════════════════ */
-.editorial-row {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:80px; align-items:center;
-}
-@media(max-width:1024px){ .editorial-row { grid-template-columns:1fr; gap:60px; } }
-.ed-left { position:relative; }
-.ed-right { padding-left:40px; }
-@media(max-width:1024px){ .ed-right { padding-left:0; } }
-.ed-tag {
-  font-size:11px; text-transform:uppercase; letter-spacing:3px;
-  color: var(--gold); margin-bottom:20px; display:block;
-}
-.ed-heading {
-  font-family: var(--font-serif); font-size:54px; font-weight:300;
-  line-height:1.15; color: var(--white); margin-bottom:30px;
-}
-@media(max-width:768px){ .ed-heading { font-size:38px; } }
-.ed-desc {
-  font-size:15px; line-height:1.7; color: var(--silver);
-  margin-bottom:40px; max-width:480px; font-weight:300;
+.scroll-text{
+  font-size:.5rem;letter-spacing:.35em;
+  color:rgba(255,255,255,.3);text-transform:uppercase;
 }
 
 /* ═══════════════════════════════════════════
-   PROMOTION BANNER & COUNTDOWN
+   MARQUEE STRIP
 ═══════════════════════════════════════════ */
-.promo-banner {
-  position:relative; background: var(--ink-2); overflow:hidden; border-top:1px solid rgba(255,255,255,0.03);
+.marquee-wrap{
+  overflow:hidden;
+  padding:18px 0;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:var(--ink-2);
 }
-.promo-grid { display:grid; grid-template-columns:1fr 1.2fr; min-height:600px; }
-@media(max-width:1024px){ .promo-grid { grid-template-columns:1fr; } }
-.promo-img { position:relative; background:#000; min-height:400px; }
-.promo-img img { width:100%; height:100%; object-fit:cover; opacity:0.75; }
-.promo-body {
-  display:flex; flex-direction:column; justify-content:center;
-  padding:100px 120px; position:relative;
+.marquee-track{
+  display:flex;gap:0;
+  animation:marquee 22s linear infinite;
+  width:max-content;
 }
-@media(max-width:1200px){ .promo-body { padding:80px 60px; } }
-@media(max-width:768px){ .promo-body { padding:60px 20px; } }
-.cd-cluster { display:flex; gap:30px; margin:40px 0; }
-@media(max-width:480px){ .cd-cluster { gap:15px; } }
-.cd-segment { display:flex; flex-direction:column; align-items:center; }
-.cd-val {
-  font-family: var(--font-disp); font-size:56px; color: var(--white); line-height:1;
+.marquee-item{
+  display:flex;align-items:center;gap:56px;
+  padding:0 56px;flex-shrink:0;
 }
-@media(max-width:768px){ .cd-val { font-size:42px; } }
-.cd-lbl {
-  font-size:10px; text-transform:uppercase; letter-spacing:2px;
-  color: var(--gold); margin-top:10px;
+.marquee-item span{
+  font-size:.58rem;letter-spacing:.35em;font-weight:400;
+  color:var(--silver);text-transform:uppercase;white-space:nowrap;
+}
+.marquee-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 
 /* ═══════════════════════════════════════════
-   FOOTER COUTURE
+   SECTION COMMONS
 ═══════════════════════════════════════════ */
-.f {
-  background: #040405; padding:100px 0 40px;
-  border-top:1px solid rgba(255,255,255,0.03);
+section{padding:clamp(80px,10vw,140px) 6%}
+.s-label{
+  display:flex;align-items:center;gap:14px;
+  font-size:.55rem;letter-spacing:.45em;font-weight:400;
+  color:var(--accent);text-transform:uppercase;margin-bottom:18px;
 }
-.f-grid {
-  display:grid; grid-template-columns:1.5fr repeat(3,1fr); gap:60px;
-  margin-bottom:80px;
+.s-label::before{
+  content:'';width:28px;height:1px;
+  background:currentColor;flex-shrink:0;
 }
-@media(max-width:1024px){ .f-grid { grid-template-columns:repeat(2,1fr); gap:45px; } }
-@media(max-width:600px){ .f-grid { grid-template-columns:1fr; gap:35px; } }
-.f-logo { font-family: var(--font-disp); font-size:24px; letter-spacing:4px; color:var(--white); margin-bottom:24px; }
-.f-about { font-size:14px; line-height:1.6; color: var(--silver); max-width:280px; font-weight:300; }
-.f-title { font-size:12px; text-transform:uppercase; letter-spacing:2px; color: var(--gold); margin-bottom:24px; }
-.f-links { list-style:none; display:flex; flex-direction:column; gap:14px; }
-.f-links a { font-size:13px; color: var(--silver); transition:color 0.3s ease; font-weight:300; }
-.f-links a:hover { color: var(--white); }
-.f-bottom {
-  border-top:1px solid rgba(255,255,255,0.03); padding-top:40px;
-  display:flex; justify-content:between; align-items:center;
-  font-size:12px; color: var(--silver); letter-spacing:0.5px;
+.s-title{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(2.4rem,5vw,5.2rem);
+  font-weight:300;line-height:1.0;
+  letter-spacing:-.01em;margin-bottom:20px;
 }
-@media(max-width:768px){ .f-bottom { flex-direction:column; gap:20px; text-align:center; } }
+.s-title em{font-style:italic;color:var(--silver)}
+.s-sub{
+  font-size:.72rem;letter-spacing:.1em;line-height:2;
+  color:var(--silver);max-width:460px;
+}
+.s-head-row{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;margin-bottom:64px;
+}
+.s-view-all{
+  font-size:.58rem;letter-spacing:.25em;color:var(--silver);
+  text-transform:uppercase;font-weight:400;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding-bottom:4px;
+  transition:color .3s,border-color .3s;
+}
+.s-view-all:hover{color:var(--white);border-color:rgba(255,255,255,.5)}
+
+.sr{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.sr.v{opacity:1;transform:translateY(0)}
+.sr-l{opacity:0;transform:translateX(-30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.sr-l.v{opacity:1;transform:translateX(0)}
+.sr-s{opacity:0;transform:scale(.96);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.sr-s.v{opacity:1;transform:scale(1)}
 
 /* ═══════════════════════════════════════════
-   CORE ENGINE ANIMATIONS (SCROLL REVEAL)
+   PRODUCT GRID & CARDS
 ═══════════════════════════════════════════ */
-.sr { opacity:0; transform:translateY(40px); transition:opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-.sr-l { opacity:0; transform:translateX(-40px); transition:opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-.sr-s { opacity:0; transform:scale(0.96); transition:opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-.sr.v, .sr-l.v, .sr-s.v { opacity:1; transform:none; }
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+@media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.grid-4,.grid-3{grid-template-columns:1fr}}
 
-/* Elegant Custom Skeletal Loading State */
-.shimmer-loader {
-  grid-column: 1 / -1; text-align: center; padding: 60px 0;
-  font-family: var(--font-sans); color: var(--silver); letter-spacing: 2px; font-size: 14px;
-  text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 15px;
+.p-card{
+  position:relative;overflow:hidden;
+  background:var(--ink-2);
 }
-.shimmer-circle {
-  width: 24px; height: 24px; border: 2px solid rgba(255,255,255,0.1);
-  border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite;
+.p-card-img{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:3/4;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+.p-card-img img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:transform 1.2s var(--ease), filter .6s, opacity .6s var(--ease);
+  filter:brightness(.9);
+}
+.p-card-img img.active {
+  opacity:1;
+}
+.p-card:hover .p-card-img img{
+  transform:scale(1.08);filter:brightness(1);
+}
+.p-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(8,8,10,.95) 100%);
+  opacity:0;transition:opacity .5s;
+  z-index:2;
+}
+.p-card:hover .p-card-overlay{opacity:1}
+.p-card-badge{
+  position:absolute;top:16px;left:16px;
+  font-size:.5rem;letter-spacing:.2em;font-weight:500;
+  text-transform:uppercase;padding:5px 12px;
+  background:var(--white);color:var(--ink);
+  z-index:3;
+}
+.p-card-badge.sale{background:var(--accent);color:var(--ink)}
+.p-card-badge.hot{background:var(--ink);color:var(--white);border:1px solid rgba(255,255,255,.2)}
+.p-card-action{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px;
+  transform:translateY(100%);opacity:0;
+  transition:transform .5s var(--ease),opacity .4s;
+  z-index:4;
+}
+.p-card:hover .p-card-action{transform:translateY(0);opacity:1}
+.p-card-info{padding:18px 16px 22px}
+.p-cat{
+  font-size:.52rem;letter-spacing:.25em;
+  color:var(--silver);text-transform:uppercase;margin-bottom:6px;
+}
+.p-name{
+  font-family:'Bodoni Moda',serif;
+  font-size:1.05rem;font-weight:300;letter-spacing:.02em;
+  margin-bottom:8px;line-height:1.3;
+}
+.p-desc-text{
+  font-size:.65rem;
+  color:var(--silver);
+  line-height:1.5;
+  margin-bottom:10px;
+}
+.p-price-row{display:flex;align-items:center;gap:10px}
+.p-price{font-size:.82rem;font-weight:400;color:var(--silver-3)}
+.p-price-old{
+  font-size:.7rem;color:rgba(168,168,176,.5);
+  text-decoration:line-through;
+}
+.wa-card-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;
+  background:rgba(255,255,255,.96);
+  color:var(--ink);
+  font-size:.58rem;letter-spacing:.2em;font-weight:500;
+  text-transform:uppercase;
+  transition:background .3s,transform .3s;
+}
+.wa-card-btn:hover{background:var(--accent)}
+.wa-card-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+
+/* ═══════════════════════════════════════════
+   TRENDING
+═══════════════════════════════════════════ */
+#trending{background:var(--ink)}
+.trending-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;
+}
+@media(max-width:900px){
+  .trending-layout{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+  .trending-layout{grid-template-columns:1fr}
+}
+
+/* ═══════════════════════════════════════════
+   EDITORIAL SPLIT — NEW ARRIVALS
+═══════════════════════════════════════════ */
+#new-arrivals{background:var(--ink-2)}
+.editorial-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-bottom:2px;
+}
+.editorial-split .p-card-img{aspect-ratio:1/1.3}
+.editorial-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.editorial-row .p-card-img{aspect-ratio:1/1.1}
+@media(max-width:768px){
+  .editorial-split,.editorial-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:440px){
+  .editorial-split,.editorial-row{grid-template-columns:1fr}
+}
+
+/* ═══════════════════════════════════════════
+   BEST SELLERS
+═══════════════════════════════════════════ */
+#best-sellers{background:var(--ink)}
+
+/* ═══════════════════════════════════════════
+   COLLECTIONS GRID
+═══════════════════════════════════════════ */
+#collections{background:var(--ink-2)}
+.collections-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+@media(max-width:900px){.collections-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  background:var(--ink-2);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:80px 6% 40px;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.2fr;
+  gap:48px;margin-bottom:64px;
+}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.footer-top{grid-template-columns:1fr}}
+.f-brand{max-width:300px}
+.f-logo{
+  font-family:'Italiana',serif;
+  font-size:1.8rem;letter-spacing:.3em;
+  margin-bottom:18px;display:block;
+}
+.f-desc{
+  font-size:.68rem;letter-spacing:.08em;line-height:2;
+  color:var(--silver);margin-bottom:28px;
+}
+.f-socials{display:flex;gap:10px}
+.f-soc{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--silver);
+  transition:color .3s,border-color .3s,background .3s;
+}
+.f-soc:hover{color:var(--white);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+.f-soc svg{width:13px;height:13px;fill:currentColor}
+.f-col h5{
+  font-size:.55rem;letter-spacing:.35em;font-weight:500;
+  text-transform:uppercase;color:var(--silver);
+  margin-bottom:24px;
+}
+.f-col li{margin-bottom:10px}
+.f-col a{
+  font-size:.7rem;letter-spacing:.08em;
+  color:rgba(168,168,176,.7);
+  transition:color .3s;
+}
+.f-col a:hover{color:var(--white)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:32px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+}
+.f-copy{font-size:.58rem;letter-spacing:.18em;color:rgba(168,168,176,.5)}
+.f-copy span{color:var(--accent)}
+
+/* ═══════════════════════════════════════════ FLOATING WA ═══════════════════════════════════════════ */
+.wa-float{
+  position:fixed;bottom:32px;right:32px;z-index:990;
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;box-shadow:0 8px 32px rgba(37,211,102,.35);
+  animation:waPulse 3s ease-in-out infinite;
+  transition:transform .3s var(--ease);
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:22px;height:22px;fill:currentColor}
+@keyframes waPulse{
+  0%,100%{box-shadow:0 8px 32px rgba(37,211,102,.35)}
+  50%{box-shadow:0 8px 48px rgba(37,211,102,.6)}
+}
+
+@keyframes fadeSlide{ from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn{ to{opacity:1} }
+@keyframes lineReveal{ from{opacity:0;transform:translateY(100%)} to{opacity:1;transform:translateY(0)} }
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:rgba(212,175,106,.4)}
+
+@media(max-width:900px){
+  .nav-center{display:none}
+  .hamburger{display:flex}
+  .nav-right .nav-icon:not(:nth-last-child(-n+3)){display:none}
+}
+@media(max-width:540px){
+  .hero-actions{flex-direction:column;width:100%;max-width:300px}
+  .btn-wa,.btn-outline{justify-content:center;width:100%}
+}
 </style>
 </head>
 <body>
 
-<header class="h">
-  <div class="c">
-    <div class="h-inner">
-      <a href="#" class="logo">Hoor Studio</a>
-      <nav class="nav">
-        <a href="#" class="nav-link">Pret</a>
-        <a href="#" class="nav-link">Couture</a>
-        <a href="#" class="nav-link">Editorial</a>
-        <a href="#" class="nav-link">The Studio</a>
-      </nav>
-      <div class="h-actions">
-        <button class="h-btn" aria-label="Search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
+<div id="cur"></div>
+<div id="cur-orbit"></div>
 
-<section class="hero">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" alt="Luxury Editorial Background">
+<div id="loader">
+  <div class="loader-brand">
+    <span style="animation-delay:.05s">H</span><span style="animation-delay:.1s">O</span><span style="animation-delay:.15s">O</span><span style="animation-delay:.2s">R</span>&nbsp;&nbsp;<span style="animation-delay:.35s">S</span><span style="animation-delay:.4s">T</span><span style="animation-delay:.45s">U</span><span style="animation-delay:.5s">D</span><span style="animation-delay:.55s">I</span><span style="animation-delay:.6s">O</span>
   </div>
+  <div class="loader-progress"><div class="loader-bar"></div></div>
+  <div class="loader-num" id="loaderNum">0</div>
+</div>
+
+<a class="wa-float" href="https://wa.me/923059218013?text=Hello%20Hoor%20Studio%2C%20I%20am%20interested%20in%20your%20products." target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.454 5.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<nav id="navbar">
+  <div class="nav-logo">HOOR STUDIO</div>
+  <div class="nav-center">
+    <a href="#hero">Home</a>
+    <a href="#trending">Trending</a>
+    <a href="#new-arrivals">New Arrivals</a>
+    <a href="#best-sellers">Best Sellers</a>
+    <a href="#collections">Collections</a>
+  </div>
+  <div class="nav-right">
+    <button class="hamburger" id="ham">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobMenu">
+  <a href="#hero" class="mob-link">Home</a>
+  <a href="#trending" class="mob-link">Trending</a>
+  <a href="#new-arrivals" class="mob-link">New Arrivals</a>
+  <a href="#best-sellers" class="mob-link">Best Sellers</a>
+  <a href="#collections" class="mob-link">Collections</a>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1600" alt="Hero"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-vignette"></div>
   <div class="hero-content">
-    <div class="hero-sub sr">New Season 2026</div>
-    <h1 class="hero-title sr">High-End Luxury <i>Western Couture</i></h1>
-    <div class="sr" style="transition-delay:0.1s;">
-      <a href="#collections" class="btn-lux">Explore Collections</a>
+    <div class="hero-eyebrow">Premium Kids Couture</div>
+    <h1 class="hero-h1">
+      <span class="line"><span>Pure Comfort.</span></span>
+      <span class="line"><span><em>Timeless</em> Elegance.</span></span>
+    </h1>
+    <p class="hero-sub">Discover curated baby garments crafted from the finest organic threads, tailored for unforgettable childhood memories.</p>
+    <div class="hero-actions">
+      <a href="#trending" class="btn-wa">Explore Collections</a>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Complimentary Shipping Worldwide</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>100% Organic Pure Egyptian Cotton</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>New Arrivals Drop Weekly</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Complimentary Shipping Worldwide</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>100% Organic Pure Egyptian Cotton</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>New Arrivals Drop Weekly</span><div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<section id="trending">
+  <div class="s-head-row sr">
+    <div>
+      <span class="s-label">The Hot List</span>
+      <h2 class="s-title">Trending <em>Now</em></h2>
+    </div>
+  </div>
+  <div class="trending-layout grid-3" id="trending-grid">
+    </div>
+</section>
+
+<section id="new-arrivals">
+  <div class="s-head-row sr">
+    <div>
+      <span class="s-label">Fresh In Stock</span>
+      <h2 class="s-title">New <em>Arrivals</em></h2>
+    </div>
+  </div>
+  <div class="editorial-row grid-4" id="new-arrivals-grid">
+    </div>
+</section>
+
+<section id="best-sellers">
+  <div class="s-head-row sr">
+    <div>
+      <span class="s-label">Most Loved</span>
+      <h2 class="s-title">Best <em>Sellers</em></h2>
+    </div>
+  </div>
+  <div class="grid-4" id="best-sellers-grid">
+    </div>
+</section>
+
+<section id="collections">
+  <div class="s-head-row sr">
+    <div>
+      <span class="s-label">Curated Series</span>
+      <h2 class="s-title">Shop by <em>Capsule</em></h2>
+    </div>
+  </div>
+  <div class="collections-grid">
+    <div class="col-card sr">
+      <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600" alt="Infant">
+      <div class="col-card-content">
+        <h4 class="col-card-name">Infant Essential</h4>
+        <span class="col-card-count">0-12 Months</span>
+      </div>
+    </div>
+    <div class="col-card sr">
+      <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=600" alt="Toddler">
+      <div class="col-card-content">
+        <h4 class="col-card-name">Toddler Play</h4>
+        <span class="col-card-count">1-3 Years</span>
+      </div>
+    </div>
+    <div class="col-card sr">
+      <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=600" alt="Kids">
+      <div class="col-card-content">
+        <h4 class="col-card-name">Junior Sartorial</h4>
+        <span class="col-card-count">4-8 Years</span>
+      </div>
+    </div>
+    <div class="col-card sr">
+      <img src="https://images.unsplash.com/photo-1515488042361-404e9250af04?q=80&w=600" alt="Accessories">
+      <div class="col-card-content">
+        <h4 class="col-card-name">Accessories</h4>
+        <span class="col-card-count">Cradle & Care</span>
+      </div>
     </div>
   </div>
 </section>
 
-<div id="collections"></div>
-
-<section class="sec-pad">
-  <div class="c">
-    <div class="sec-head sr">
-      <div class="sh-sub">Curated Luxury</div>
-      <h2 class="sh-title">Trending Now</h2>
+<footer>
+  <div class="footer-top">
+    <div class="f-brand">
+      <span class="f-logo">HOOR STUDIO</span>
+      <p class="f-desc">Redefining aesthetic milestones for modern childhood. Crafting timeless garments that look like luxury and feel like family.</p>
     </div>
-    <div class="trending-layout" id="trending-container">
-       <div class="shimmer-loader"><div class="shimmer-circle"></div>Loading Luxury Collection...</div>
+    <div class="f-col">
+      <h5>Sartorial</h5>
+      <ul>
+        <li><a href="#new-arrivals">New Autumn Collection</a></li>
+        <li><a href="#best-sellers">The Organic Staples</a></li>
+      </ul>
     </div>
-  </div>
-</section>
-
-<section class="sec-pad" style="background: var(--ink-2);">
-  <div class="c">
-    <div class="sec-head sr">
-      <div class="sh-sub">The Latest Drop</div>
-      <h2 class="sh-title">New Arrivals</h2>
+    <div class="f-col">
+      <h5>Assistance</h5>
+      <ul>
+        <li><a href="#contact">Contact Concierge</a></li>
+        <li><a href="https://wa.me/923059218013" target="_blank">Order Tracker</a></li>
+      </ul>
     </div>
-    <div class="trending-layout" id="new-arrivals-container">
-       <div class="shimmer-loader"><div class="shimmer-circle"></div>Loading New Drops...</div>
-    </div>
-  </div>
-</section>
-
-<section class="sec-pad">
-  <div class="c">
-    <div class="sec-head sr">
-      <div class="sh-sub">Most Coveted</div>
-      <h2 class="sh-title">Best Sellers</h2>
-    </div>
-    <div class="trending-layout" id="best-sellers-container">
-       <div class="shimmer-loader"><div class="shimmer-circle"></div>Loading Best Sellers...</div>
+    <div class="f-col">
+      <h5>Bespoke Care</h5>
+      <a class="f-wa-btn" href="https://wa.me/923059218013" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.454 5.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Chat
+      </a>
     </div>
   </div>
-</section>
-
-<section class="sec-pad" style="background: var(--ink-2);">
-  <div class="c">
-    <div class="editorial-row">
-      <div class="ed-left sr-l">
-        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" alt="Editorial Lookbook">
-      </div>
-      <div class="ed-right sr">
-        <span class="ed-tag">The Philosophy</span>
-        <h3 class="ed-heading">Crafting Memories In Every Single Thread</h3>
-        <p class="ed-desc">Every silhouette is born out of meticulous planning and premium materials. Our premium western wear represents timeless luxury combined with bold modern aesthetics.</p>
-        <a href="#" class="btn-lux">Read Lookbook</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="promo-banner">
-  <div class="promo-grid">
-    <div class="promo-img">
-      <img src="https://images.unsplash.com/photo-1445205170230-053b830c6038?q=80&w=2070" alt="Private Sale Image">
-    </div>
-    <div class="promo-body sr">
-      <span class="ed-tag">Exclusive Access</span>
-      <h3 class="ed-heading" style="font-size:42px; margin-bottom:15px;">The Private Atelier Sale</h3>
-      <p class="ed-desc" style="margin-bottom:20px;">Exceptional pricing on selected past-season archival masterpieces. Strictly limited time.</p>
-      
-      <div class="cd-cluster">
-        <div class="cd-segment"><div class="cd-val" id="cdD">02</div><div class="cd-lbl">Days</div></div>
-        <div class="cd-segment"><div class="cd-val" id="cdH">14</div><div class="cd-lbl">Hrs</div></div>
-        <div class="cd-segment"><div class="cd-val" id="cdM">37</div><div class="cd-lbl">Min</div></div>
-        <div class="cd-segment"><div class="cd-val" id="cdS">44</div><div class="cd-lbl">Sec</div></div>
-      </div>
-
-      <div>
-        <a href="#" class="btn-lux" style="background:transparent; color:var(--white); border-color:rgba(255,255,255,0.2);">Request Access</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="f">
-  <div class="c">
-    <div class="f-grid">
-      <div>
-        <div class="f-logo">Hoor Studio</div>
-        <p class="f-about">An architectural perspective on premium modern luxury women's fashion.</p>
-      </div>
-      <div>
-        <h4 class="f-title">Collections</h4>
-        <ul class="f-links">
-          <li><a href="#">Pret-A-Porter</a></li>
-          <li><a href="#">Evening Gowns</a></li>
-          <li><a href="#">Atelier Blazers</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="f-title">The House</h4>
-        <ul class="f-links">
-          <li><a href="#">Our Story</a></li>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="f-title">Legal & Care</h4>
-        <ul class="f-links">
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Shipping & Returns</a></li>
-          <li><a href="#">Garment Care</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="f-bottom">
-      <div>&copy; 2026 HOOR STUDIO COUTURE. All Rights Reserved.</div>
-      <div style="margin-top:10px; color:rgba(255,255,255,0.2); font-size:10px;">Crafted for High-End Digital Presence.</div>
-    </div>
+  <div class="footer-bottom">
+    <div class="f-copy">&copy; 2026 Hoor Studio. Created by <span>Luxury Studio</span>.</div>
   </div>
 </footer>
 
 <script>
-// ── AUTOMATIC COUTURE FETCH ENGINE ──
-// Yeh link aapki repository ke mutabiq 100% sahi hai.
-const PRODUCTS_JSON_URL = 'https://raw.githubusercontent.com/Hoor-Studio/Hoor/main/_products/products.json';
+// ── CURSOR EXECUTION ───────────────────────────────────────────────
+const cur = document.getElementById('cur');
+const orb = document.getElementById('cur-orbit');
+window.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+  orb.style.left = e.clientX + 'px'; orb.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .col-card, .p-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
+});
 
-async function loadDynamicProducts() {
-  try {
-    const response = await fetch(PRODUCTS_JSON_URL);
-    if (!response.ok) throw new Error('Database response not OK');
-    const products = await response.json();
+// ── LOADER EXECUTION ───────────────────────────────────────────────
+let lNum = 0;
+const lInt = setInterval(() => {
+  lNum += Math.floor(Math.random() * 12) + 4;
+  if(lNum >= 100) { lNum = 100; clearInterval(lInt); setTimeout(() => document.getElementById('loader').style.display='none', 600); }
+  document.getElementById('loaderNum').textContent = lNum;
+}, 60);
 
-    if (!products || products.length === 0) {
-      const emptyState = '<div class="shimmer-loader">No premium products listed yet. Add from admin.</div>';
-      document.getElementById('trending-container').innerHTML = emptyState;
-      document.getElementById('new-arrivals-container').innerHTML = emptyState;
-      document.getElementById('best-sellers-container').innerHTML = emptyState;
-      return;
-    }
+// ── NAVBAR STICKY ─────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 40) document.getElementById('navbar').classList.add('solid');
+  else document.getElementById('navbar').classList.remove('solid');
+});
 
-    document.getElementById('trending-container').innerHTML = '';
-    document.getElementById('new-arrivals-container').innerHTML = '';
-    document.getElementById('best-sellers-container').innerHTML = '';
+// ── MOBILE MENU ───────────────────────────────────────────────────
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mobMenu');
+ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+mob.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); }));
 
-    let hasTrending = false, hasNew = false, hasBest = false;
-
-    products.forEach((product) => {
-      // Aapka asli layout classes aur animations ke sath
-      const cardHTML = `
-        <div class="p-card sr">
-          <div class="p-card-img">
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
-            <div class="p-card-overlay"></div>
-            <div class="p-card-action">
-              <a href="https://wa.me/923001234567?text=Hi,%20I%20want%20to%20enquire%20about%20the%20product:%20${encodeURIComponent(product.name)}" class="wa-card-btn" target="_blank">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.742.002-2.602-1.005-5.05-2.839-6.89C16.626 2.132 14.21 1.128 11.66 1.128c-5.442 0-9.866 4.372-9.87 9.746-.002 1.902.497 3.754 1.445 5.399l-1.02 3.722 3.842-.999z"/></svg>
-                QUICK ENQUIRY
-              </a>
-            </div>
-          </div>
-          <div class="p-card-meta">
-            <h3 class="p-card-title">${product.name}</h3>
-            <div class="p-card-price">${product.price}</div>
-          </div>
-        </div>
-      `;
-
-      if (product.section === 'trending') {
-        document.getElementById('trending-container').insertAdjacentHTML('beforeend', cardHTML);
-        hasTrending = true;
-      } else if (product.section === 'new-arrivals') {
-        document.getElementById('new-arrivals-container').insertAdjacentHTML('beforeend', cardHTML);
-        hasNew = true;
-      } else if (product.section === 'best-sellers') {
-        document.getElementById('best-sellers-container').insertAdjacentHTML('beforeend', cardHTML);
-        hasBest = true;
-      }
-    });
-
-    if (!hasTrending) document.getElementById('trending-container').innerHTML = '<div class="shimmer-loader">Collection Coming Soon</div>';
-    if (!hasNew) document.getElementById('new-arrivals-container').innerHTML = '<div class="shimmer-loader">New Season Drops Coming Soon</div>';
-    if (!hasBest) document.getElementById('best-sellers-container').innerHTML = '<div class="shimmer-loader">Most Coveted Pieces Coming Soon</div>';
-
-    // Scroll reveal ko naye dynamic products par chalana
-    const newlyLoadedCards = document.querySelectorAll('.trending-layout .sr');
-    newlyLoadedCards.forEach(el => obs.observe(el));
-
-  } catch (error) {
-    console.error('Couture Fetch Engine Error:', error);
-    const errorState = '<div class="shimmer-loader" style="color:rgba(255,0,0,0.4);">Configuration connection pending...</div>';
-    document.getElementById('trending-container').innerHTML = errorState;
-    document.getElementById('new-arrivals-container').innerHTML = errorState;
-    document.getElementById('best-sellers-container').innerHTML = errorState;
-  }
-}
-
-window.addEventListener('DOMContentLoaded', loadDynamicProducts);
-
-// ── SCROLL ANIMATIONS OBSERVER (No Changes) ──
+// ── INTERSECTION OBSERVER FOR REVEAL ──────────────────────────────
 const srEls = document.querySelectorAll('.sr,.sr-l,.sr-s');
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
     if(e.isIntersecting){
       const siblings = Array.from(e.target.parentElement.children).filter(c=>c.classList.contains('sr')||c.classList.contains('sr-s'));
       const idx = siblings.indexOf(e.target);
@@ -520,17 +888,119 @@ const obs = new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 srEls.forEach(el=>obs.observe(el));
 
-// ── PRIVATE SALE COUNTDOWN ──
-const endTime = Date.now() + (2*86400+14*3600+37*60+44)*1000;
-function tick(){
-  const diff = Math.max(0,Math.floor((endTime-Date.now())/1000));
-  document.getElementById('cdD').textContent=String(Math.floor(diff/86400)).padStart(2,'0');
-  document.getElementById('cdH').textContent=String(Math.floor(diff%86400/3600)).padStart(2,'0');
-  document.getElementById('cdM').textContent=String(Math.floor(diff%3600/60)).padStart(2,'0');
-  document.getElementById('cdS').textContent=String(diff%60).padStart(2,'0');
+// ── JAVASCRIPT ENGINE FOR AUTOMATIC REFETCH & LOOP ────────────────
+// API URL lagaayein jahan Decap CMS ka data save hota hai:
+const GITHUB_PRODUCTS_API = 'https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/contents/_data/products';
+
+async function fetchProductsFromGitHub() {
+  try {
+    const res = await fetch(GITHUB_PRODUCTS_API);
+    if (!res.ok) return;
+    const files = await res.json();
+    
+    const productList = [];
+    for (const file of files) {
+      if (file.name.endsWith('.json') || file.name.endsWith('.yml') || file.name.endsWith('.md')) {
+        const rawRes = await fetch(file.download_url);
+        if (rawRes.ok) {
+          const rawData = await rawRes.text();
+          try {
+            const parsed = JSON.parse(rawData);
+            productList.push(parsed);
+          } catch(e) {}
+        }
+      }
+    }
+    if (productList.length > 0) {
+      renderProductsGrid(productList);
+    }
+  } catch (err) {
+    console.error('GitHub fetch execution interrupted:', err);
+  }
 }
-setInterval(tick,1000);
-tick();
+
+function renderProductsGrid(products) {
+  const trendingGrid = document.getElementById('trending-grid');
+  const newArrivalsGrid = document.getElementById('new-arrivals-grid');
+  const bestSellersGrid = document.getElementById('best-sellers-grid');
+  
+  trendingGrid.innerHTML = '';
+  newArrivalsGrid.innerHTML = '';
+  bestSellersGrid.innerHTML = '';
+  
+  products.forEach((product, index) => {
+    let imagesHTML = '';
+    if (product.gallery && product.gallery.length > 0) {
+      product.gallery.forEach((imgObj, i) => {
+        imagesHTML += `<img src="${imgObj.image}" class="${i === 0 ? 'active' : ''}" alt="${product.title}">`;
+      });
+    } else {
+      imagesHTML = `<img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=600" class="active" alt="Placeholder">`;
+    }
+    
+    let badgeHTML = '';
+    if (product.badge && product.badge !== 'none') {
+      badgeHTML = `<div class="p-card-badge ${product.badge}">${product.badge}</div>`;
+    }
+    
+    let oldPriceHTML = '';
+    if (product.old_price) {
+      oldPriceHTML = `<span class="p-price-old">${product.old_price}</span>`;
+    }
+    
+    const card = document.createElement('div');
+    card.className = 'p-card sr v';
+    card.innerHTML = `
+      <div class="p-card-img">
+        ${imagesHTML}
+        <div class="p-card-overlay"></div>
+        ${badgeHTML}
+        <div class="p-card-action">
+          <a class="wa-card-btn" href="https://wa.me/923059218013?text=Hello%20Hoor%20Studio%2C%20I%20want%20to%20order%20${encodeURIComponent(product.title)}%20for%20${encodeURIComponent(product.price)}" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.454 5.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="p-card-info">
+        <div class="p-cat">${product.category || 'Garments'}</div>
+        <h3 class="p-name">${product.title}</h3>
+        <p class="p-desc-text">${product.description || ''}</p>
+        <div class="p-price-row">
+          <span class="p-price">${product.price}</span>
+          ${oldPriceHTML}
+        </div>
+      </div>
+    `;
+    
+    if (index % 3 === 0) {
+      trendingGrid.appendChild(card);
+    } else if (index % 2 === 0) {
+      newArrivalsGrid.appendChild(card.cloneNode(true));
+    } else {
+      bestSellersGrid.appendChild(card.cloneNode(true));
+    }
+  }
+  
+  initCardSliders();
+}
+
+function initCardSliders() {
+  document.querySelectorAll('.p-card-img').forEach(cardImg => {
+    const images = cardImg.querySelectorAll('img');
+    if (images.length <= 1) return;
+    
+    let currentIdx = 0;
+    setInterval(() => {
+      images[currentIdx].classList.remove('active');
+      currentIdx = (currentIdx + 1) % images.length;
+      images[currentIdx].classList.add('active');
+    }, 3000);
+  });
+}
+
+fetchProductsFromGitHub();
+setInterval(fetchProductsFromGitHub, 60000);
 </script>
 </body>
 </html>
